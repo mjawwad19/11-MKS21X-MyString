@@ -48,9 +48,13 @@ public class MyString implements CharSequence, Comparable<CharSequence>{
     MyString third = new MyString("Hi");
     MyString fourth = new MyString("");
     MyString fifth = new MyString("Hillo");
+    if (args.length > 0) {first = new MyString(args[0]);}
     System.out.println(first.charAt(0)); //H
     System.out.println(first.length()); //5
     System.out.println(first.subSequence(0,2)); //He
+    //System.out.println("Hello".substring(0,2)); //He FOR CHECKING PURPOSES
+    //System.out.println(first.subSequence(0,6)); //error
+    //System.out.println("Hello".substring(0,6)); //error FOR CHECKING PURPOSES
     //System.out.println(first.charAt(-1)); // IndexOutOfBoundsException
     //System.out.println(first.subSequence(-1,4)); //IndexOutOfBoundsException
     System.out.println(first.compareTo(second)); // some negative integer
