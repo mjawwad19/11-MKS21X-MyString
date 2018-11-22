@@ -1,4 +1,4 @@
-public class MyString implements CharSequence{
+public class MyString implements CharSequence, Comparable<CharSequence>{
   private char[] data;
   public MyString(CharSequence s){
     data = new char[s.length()];
@@ -30,12 +30,34 @@ public class MyString implements CharSequence{
     }
     return out;
   }
+  public int compareTo(CharSequence o) throws ClassCastException {
+    if (o == null || o.length() == 0) throw new NullPointerException();
+    int sumData = 0;
+    for (int i = 0; i < data.length; i++) {
+      sumData += data[i];
+    }
+    for (int i = 0; i < o.length(); i++) {
+      sumData -= o.charAt(i);
+    }
+    return sumData;
+  }
+
   public static void main(String[] args) {
-    MyString a = new MyString("Hello");
-    System.out.println(a.charAt(0)); //H
-    System.out.println(a.length()); //5
-    System.out.println(a.subSequence(0,2)); //He
-    //System.out.println(a.charAt(-1)); // error
-    //System.out.println(a.subSequence(-1,4)); //error
+    MyString first = new MyString("Hello");
+    MyString second = new MyString("Hello world");
+    MyString third = new MyString("Hi");
+    MyString fourth = new MyString("");
+    MyString fifth = new MyString("Hillo");
+    System.out.println(first.charAt(0)); //H
+    System.out.println(first.length()); //5
+    System.out.println(first.subSequence(0,2)); //He
+    //System.out.println(first.charAt(-1)); // IndexOutOfBoundsException
+    //System.out.println(first.subSequence(-1,4)); //IndexOutOfBoundsException
+    System.out.println(first.compareTo(second)); // some negative integer
+    System.out.println(second.compareTo(first)); // opposite of previous sign
+    System.out.println(first.compareTo(third)); // some positive integer
+    System.out.println(first.compareTo(first)); // 0
+    //System.out.println(first.compareTo(fourth)); // NullPointerException
+    System.out.println(first.compareTo(fifth)); // some negative integer
     }
   }
