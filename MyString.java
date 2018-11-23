@@ -36,6 +36,7 @@ public class MyString implements CharSequence, Comparable<CharSequence>{
     boolean stop = false;
     int diff = 0;
     if (o.length() == 0) diff = data.length;
+    //put in here to avoid IndexOutOfBoundsException
     else {
       if (data.length != o.length()) {
         if (data.length > o.length()) {
@@ -57,6 +58,9 @@ public class MyString implements CharSequence, Comparable<CharSequence>{
           if (diff == 0) diff = data.length - o.length();
           }
         }
+        /* if the lengths of the sequences differ, return either the
+        first lexicographic difference, if there is not one, the difference in
+        length */
       for (int i = 0; i < data.length && !stop; i++) {
         a = data[i];
         b = o.charAt(i);
@@ -64,14 +68,14 @@ public class MyString implements CharSequence, Comparable<CharSequence>{
           diff = a -b;
           stop = true;
         }
-        // had to look up what actually gets returned: the first difference or the diff in length;
+        //have to put stop here because I need a return statement at the bottom :/
       }
     }
     return diff;
   }
 
 
-  public static void main(String[] args) {
+  /*public static void main(String[] args) {
       MyString first = new MyString("Hello");
       MyString second = new MyString("Hello world");
       MyString third = new MyString("Hi");
@@ -88,17 +92,18 @@ public class MyString implements CharSequence, Comparable<CharSequence>{
       System.out.println("Hello".substring(0,6)); //error FOR CHECKING PURPOSES
       System.out.println(first.charAt(-1)); // IndexOutOfBoundsException
       System.out.println(first.subSequence(-1,4)); //IndexOutOfBoundsException
-      System.out.println(first.compareTo(s)); //NullPointerException*/
-      System.out.println("ab".compareTo("ba")); //-1
+      System.out.println(first.compareTo(s)); //NullPointerException
+      //System.out.println("ab".compareTo("ba")); //-1
       System.out.println(sixth.compareTo(seventh)); // -1
-      System.out.println("Hello".compareTo("Hello world")); // -6
+      //System.out.println("Hello".compareTo("Hello world")); // -6
       System.out.println(first.compareTo(second)); // -6
-      System.out.println("Hello".compareTo("Hi")); //-4
+      //System.out.println("Hello".compareTo("Hi")); //-4
       System.out.println(first.compareTo(third)); // -4
+      //System.out.println("Hi".compareTo("Hello")); // 4
       System.out.println(third.compareTo(first)); // 4
-      System.out.println("Hello".compareTo("")); //5
+      //System.out.println("Hello".compareTo("")); //5
       System.out.println(first.compareTo(fourth));// 5
-      System.out.println("Hello".compareTo("Hillo")); //-4
+      //System.out.println("Hello".compareTo("Hillo")); //-4
       System.out.println(first.compareTo(fifth)); // -4
-    }
+    } */
   }
